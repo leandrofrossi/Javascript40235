@@ -1,0 +1,11 @@
+body{
+    background-color: black;    
+}
+.titulo{
+    color: gray;
+    text-align: center;
+    font-size: 8rem;
+    text-decoration: underline;
+    margin-top: 300px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}

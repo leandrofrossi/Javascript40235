@@ -112,7 +112,8 @@ while (menu != "3"){
         finalizarCompra();
         menu = "3";
     } else{
-        menu = "3"
+        menu = "3";
+        alert ("Compra no realizada.");
     }
 }
 
