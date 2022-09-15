@@ -1,79 +1,69 @@
-function producto (variedad, precio, cantidad){
-    this.variedad = variedad;
-    this.precio = precio;
-    this.cantidad = cantidad;
-}
 const productos = [
-    {variedad: "MALBEC", precio: 950},
-    {variedad: "CABERNET SAUVIGNON", precio: 900},
-    {variedad: "BLANCO DULCE", precio: 850},
-    {variedad: "TORRONTES", precio: 800},
-    {variedad: "ROSADO", precio: 1000},
-    {variedad: "ESPUMOSO", precio: 1200},
-]
-function saludo(){
-    alert(
-        `Hola ${usuario}. Bienvenido/a a la tienda de vinos.`
-    );
-}
-function procesoCompra (carrito){   
-    let filtro = prompt("Seleccione una variedad: \n 1- Tintos \n 2- Blancos \n 3- Rosado/Espumoso \n 4- Todos");
-        if (filtro == "1"){
-            let tintos = productos.filter((articulo)=> articulo.precio >= 900 && articulo.precio < 1000);
-            let listatintos = tintos.map((articulo)=> articulo.variedad + " " + "$" + articulo.precio);
-            alert(listatintos.join ("\n"));            
-        }
-        if (filtro == "2"){
-            let blancos = productos.filter((articulo)=> articulo.precio < 900);
-            let listablancos = blancos.map((articulo)=> articulo.variedad + " " + "$" + articulo.precio);
-            alert(listablancos.join ("\n"));    
-        }
-        if (filtro == "3"){
-            let otros = productos.filter((articulo)=> articulo.precio >= 1000);
-            let listaotros = otros.map((articulo)=> articulo.variedad + " " + "$" + articulo.precio);
-            alert(listaotros.join ("\n"));    
-        }
-        if (filtro == "4"){
-            let listaproductos = productos.map((articulo)=> articulo.variedad + " " + "$" + articulo.precio);
-            alert(listaproductos.join ("\n"))
-        }
-    let variedad = (prompt("ingresa variedad")).toUpperCase();
-    let precio = Number(prompt("ingresa precio"));
-    let cantidad = Number(prompt("ingresa cantidad"));
-    const newProduct = new producto (variedad, precio, cantidad);
-    carrito.push(newProduct);
-    alert("Producto agregado al carrito");     
-    menu = prompt("Vuelva a seleccionar una opcion del menu: \n 1- Seguir comprando. \n 2- Finalizar la compra. \n 3- Salir."); 
-}
-function resumenCompra (){
-    let todoslosproductos = carrito.map((producto)=> producto.variedad + " " + "$" + producto.precio + "x" + producto.cantidad + "= $" + producto.precio*producto.cantidad);
-    alert(todoslosproductos.join ("\n"))
-}
-function finalizarCompra(){
-    resumenCompra(carrito);
-    let total = 0;
-    carrito.forEach((producto)=>(total += producto.precio*producto.cantidad));
-    alert(`Total a pagar: $${total}`);    
+    {id:1, variedad: "MALBEC", precio: 950, imagen:"./imagenes/botella.jpeg"},
+    {id:2, variedad: "CABERNET SAUVIGNON", precio: 900, imagen:"./imagenes/botella.jpeg"},
+    {id:3, variedad: "BLANCO DULCE", precio: 850, imagen:"./imagenes/botella.jpeg"},
+    {id:4, variedad: "TORRONTES", precio: 800, imagen:"./imagenes/botella.jpeg"},
+    {id:5, variedad: "ROSADO", precio: 1000, imagen:"./imagenes/botella.jpeg"},
+    {id:6, variedad: "ESPUMOSO", precio: 1200, imagen:"./imagenes/botella.jpeg"},
+];
+function Usuario (nombre, edad) {
+    this.nombre = nombre;
+    this.edad = edad;
 }
 
 
-let carrito = [];
-let usuario = (prompt("Ingresar nombre")).toUpperCase();
-saludo();
-let menu = prompt("Seleccionar una opcion del menu: \n 1- Iniciar compra. \n 2- Finalizar la compra. \n 3- Salir.");
-while (menu != "3"){
-    switch(menu){
-        case "1":
-            procesoCompra (carrito);
-        break;
-        case "2":
-            finalizarCompra(carrito);
-            menu = "3";
-        break;
-        default:
-            menu = "3";
-            alert("Compra no realizada.");
-        break;
-    }   
+let boton = document.querySelector("#enviar");
+boton.addEventListener("click", nuevoCliente);
+
+function nuevoCliente() {
+    let nombre = document.querySelector("#name").value;
+    let edad = document.querySelector("#age").value;
+    let cliente = new Usuario(nombre, edad);
+    validarEdad(cliente);
 }
-alert (`Gracias por su compra ${usuario}. Esperamos que vuelva pronto. Hasta la próxima!`);
+function validarEdad(cliente){
+    if (cliente.edad < 18){        
+        menorEdad(cliente);            
+    } else {
+        saludo(cliente);       
+    }
+}
+function menorEdad(cliente){
+    let formulario = document.querySelector("#inicio");
+    formulario.innerHTML = "";
+    let nuevoContenido = document.createElement("div");
+    nuevoContenido.innerHTML = `<p>Lo sentimos ${cliente.nombre}, pero tu edad no alcanza para ingresar a nuestra tienda. Vuelve cuando seas mayor de 18 años.</p>`;
+
+    nuevoContenido.className = "ingreso";
+    document.body.appendChild(nuevoContenido);
+}
+function saludo(cliente) {
+    let form = document.querySelector("#inicio");
+    form.innerHTML = "";
+    let nuevoContenido = document.createElement("div");
+    nuevoContenido.innerHTML = `<p>Hola ${cliente.nombre}. Bienvenido a nuestra tienda de vinos</p>
+    <button class="boton" onClick="ingresoTienda()">Continuar</button>`;
+
+    nuevoContenido.className = "ingreso";
+    document.body.appendChild(nuevoContenido);
+}
+function ingresoTienda(){
+    let contenido = document.querySelector(".ingreso");
+    contenido.className = "row";
+    contenido.innerHTML = "";
+    productos.forEach((producto) => {
+        let card = document.createElement("div");
+        card.classList.add("card", "col-sm-12", "col-lg-3");
+        card.innerHTML = `
+            <img src="${producto.imagen}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h4 class="card-title">${producto.variedad}</h4>
+                <p class="card-text">$ ${producto.precio}</p>
+                <a href="#carrito" class="btn btn-secondary" onClick="agregarCarrito()">Comprar</a>
+            </div>`;    
+        contenido.appendChild(card);
+    });
+};
+function agregarCarrito(){
+    alert("Producto agregado al carrito");    
+}

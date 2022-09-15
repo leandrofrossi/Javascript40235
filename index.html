@@ -5,19 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <title>Curso Javascript</title>
 </head>
 <body>
-    <h1 class="titulo">Tienda de Vinos</h1>
-    <ul>
-        <li>Variedad: "MALBEC". Precio: $950</li>
-        <li>Variedad: "CABERNET SAUVIGNON". Precio: $900</li>
-        <li>Variedad: "BLANCO DULCE". Precio: $850</li>
-        <li>Variedad: "TORRONTES". Precio: $800</li>
-        <li>Variedad: "ROSADO". Precio: $1000</li>
-        <li>Variedad: "ESPUMOSO". Precio: $1200</li>
-    </ul>
+    <header>
+        <h1 class="titulo">Tienda de Vinos</h1>
+    </header>
+    <main>
+        <section id="inicio">            
+            <h2>Por Favor, ingrese sus datos</h2>
+            <div class="form">                
+                <div class="column">
+                    <label for="name">NOMBRE</label>
+                    <input class="field" type="text" name="name" id="name" autocomplete="off">                
+                    <label for="age">EDAD</label>
+                    <input class="field" type="number" min="1" name="age" id="age" autocomplete="off">                    
+                    <button class="boton" id="enviar">Enviar</button>                
+                </div>
+            </div>        
+        </section>
+    </main>    
     
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
     <script src="./main.js"></script>
 </body>
 </html>
