@@ -16,9 +16,6 @@ if(localStorage.getItem("carrito")){
 }
 let total = 0;
 let main = document.querySelector("#main");
-let botonCart = document.querySelector("#btnCart");
-botonCart.addEventListener("click", mostrarCarrito);
-
 let boton = document.querySelector("#enviar");
 boton.addEventListener("click", nuevoCliente);
 
@@ -32,7 +29,7 @@ function menorEdad(cliente){
     let formulario = document.querySelector("#inicio");
     formulario.innerHTML = "";
     let nuevoContenido = document.createElement("div");
-    nuevoContenido.innerHTML = `<p>Lo sentimos ${cliente.nombre}, pero tu edad no alcanza para ingresar a nuestra tienda. Vuelve cuando seas mayor de 18 años.</p>`;
+    nuevoContenido.innerHTML = `<p>Lo sentimos ${cliente.nombre}, pero tu edad no alcanza para ingresar a nuestra tienda. Volvé cuando seas mayor de 18 años.</p>`;
 
     nuevoContenido.className = "ingreso";
     document.body.appendChild(nuevoContenido);
@@ -46,7 +43,7 @@ function saludo(cliente) {
 
     nuevoContenido.className = "ingreso";
     document.body.appendChild(nuevoContenido);
-    sessionStorage.setItem("cliente",JSON.stringify(cliente));
+    sessionStorage.setItem("cliente",JSON.stringify(cliente));    
 }
 function ingresoTienda(){
     let contenido = document.querySelector(".ingreso");
@@ -65,6 +62,8 @@ function ingresoTienda(){
         contenido.appendChild(card);
     });
     main.appendChild(contenido)
+    let botonCart = document.querySelector("#btnCart");
+    botonCart.addEventListener("click", mostrarCarrito);
 };
 function agregarCarrito(id){
     const carritoId = carrito.findIndex((art) => {
@@ -186,6 +185,8 @@ function finalizarCompra(){
             </div> 
         </div> `
     main.appendChild(finCompra);
+    carrito=[];
+    total = 0;     
 }
 function saludoFinal(){
     let usuario = JSON.parse(sessionStorage.getItem("cliente"));
