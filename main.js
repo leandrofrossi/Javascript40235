@@ -1,19 +1,22 @@
 const productos = [
-    {id:1, variedad: "MALBEC", precio: 950, imagen:"./imagenes/botella.jpeg"},
-    {id:2, variedad: "CABERNET SAUVIGNON", precio: 900, imagen:"./imagenes/botella.jpeg"},
-    {id:3, variedad: "BLANCO DULCE", precio: 850, imagen:"./imagenes/botella.jpeg"},
-    {id:4, variedad: "TORRONTES", precio: 800, imagen:"./imagenes/botella.jpeg"},
-    {id:5, variedad: "ROSADO", precio: 1000, imagen:"./imagenes/botella.jpeg"},
-    {id:6, variedad: "ESPUMOSO", precio: 1200, imagen:"./imagenes/botella.jpeg"},
+    {id:1, variedad: "MALBEC", precio: 950, imagen:"./imagenes/malbec.jpg"},
+    {id:2, variedad: "MALBEC RESERVA", precio: 1300, imagen:"./imagenes/malbecReserva.jpg"},
+    {id:3, variedad: "CABERNET SAUVIGNON", precio: 1200, imagen:"./imagenes/cabernet.png"},
+    {id:4, variedad: "CABERNET SAUVIGNON RESERVA", precio: 1800, imagen:"./imagenes/cabernetReserva.jpg"},
+    {id:5, variedad: "PINOT NOIR", precio: 2000, imagen:"./imagenes/pinot.jpg"},
+    {id:6, variedad: "RED BLEND", precio: 1250, imagen:"./imagenes/redBlend.jpg"},
+    {id:7, variedad: "ROSADO", precio: 1150, imagen:"./imagenes/rosado.png"},
+    {id:8, variedad: "BLANCO DULCE", precio: 1000, imagen:"./imagenes/blancoDulce.jpg"},
+    {id:9, variedad: "SAUVIGNON BLANC", precio: 850, imagen:"./imagenes/sauvignonBlanc.jpg"},
+    {id:10, variedad: "TORRONTES", precio: 750, imagen:"./imagenes/torrontes.jpg"},
+    {id:11, variedad: "ESPUMOSO BRUT NATURE", precio: 2200, imagen:"./imagenes/espumoso.jpg"},
+    {id:12, variedad: "ESPUMOSO DULCE", precio: 1500, imagen:"./imagenes/espumosoDulce.jpg"},
 ];
 function Usuario (nombre, edad) {
     this.nombre = nombre;
     this.edad = edad;
 }
-let carrito = [];
-if(localStorage.getItem("carrito")){
-    carrito = JSON.parse(localStorage.getItem("carrito"));
-}
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let total = 0;
 let main = document.querySelector("#main");
 let boton = document.querySelector("#enviar");
@@ -104,7 +107,7 @@ function mostrarCarrito(){
     main.appendChild(divCarrito);
     if(carrito.length>0){
         carrito.forEach((producto,id)=>{            
-            total = total + producto.precio*producto.cantidad;
+            //total = total + producto.precio*producto.cantidad;
             const carritoCard = document.createElement("div");
             carritoCard.className = "carritoCard";
             carritoCard.innerHTML = `
@@ -117,6 +120,9 @@ function mostrarCarrito(){
             `
             divCarrito.appendChild(carritoCard)
         });
+        total = carrito.reduce((acc,producto)=>{
+            return acc + producto.precio*producto.cantidad
+        },0);
         const totalCarrito = document.createElement("div");
         totalCarrito.className = "totalCarrito";
         totalCarrito.innerHTML = `
@@ -137,11 +143,11 @@ function mostrarCarrito(){
     }
 
 }
-function productDelete(id){       
+function productDelete(id){         
     carrito.splice(id,1);
     total = 0;
     storage(carrito);
-    mostrarCarrito();    
+    mostrarCarrito();  
 }
 function borrarCarrito(){
     carrito=[];
