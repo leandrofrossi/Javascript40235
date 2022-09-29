@@ -53,6 +53,7 @@ function saludo(cliente) {
     Swal.fire({
         title: '¡Hola!',        
         text: "Bienvenido a nuestra tienda de vinos.",
+        color: 'black',
         imageUrl: '/imagenes/saludo.jpg',
         imageWidth: 450,
         imageHeight: 300,
@@ -112,7 +113,8 @@ function agregarCarrito(id){
           
           Toast.fire({
             icon: 'success',
-            title: 'Producto agregado al carrito'
+            title: 'Producto agregado al carrito',
+            color: 'black',
           })        
     } else {
         carrito[carritoId].cantidad +=1; 
@@ -185,6 +187,7 @@ function productDelete(id){
     Swal.fire({
         title: '¿Eliminar producto?',
         text: "Se eliminará el producto del carrito definitivamente",
+        color: 'black',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -209,6 +212,7 @@ function borrarCarrito(){
     Swal.fire({
         title: '¿Estas seguro/a?',
         text: "Se eliminarán todos los productos del carrito.",
+        color: 'black',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -259,6 +263,7 @@ function finalizarCompra(){
       swalWithBootstrapButtons.fire({
         title: '¿Desea finalizar la compra?',        
         icon: 'warning',
+        color: 'black',
         showCancelButton: true,
         confirmButtonText: 'Si, finalizar.',
         cancelButtonText: 'No, seguir comprando.',
