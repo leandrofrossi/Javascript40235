@@ -1,23 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none; 
+}
 body{
-    background-color: whitesmoke;         
+    background-color: whitesmoke;      
+    position: relative;
+    min-height: 100vh;   
 }
 main{
-    padding: 20px;    
-}
-header{
-    background-color: darkgrey;
+    padding: 20px;
+    background-color: #838181;
+    color: black;
+    min-height: 62vh;    
+}      
+header{    
     padding: 20px;
     border-bottom: 2px solid black;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-evenly;    
+    position: sticky;
+    top: 0;
+    background-color: #874421;
+    background-image: url(./imagenes/header.jfif);
+    background-size: cover;   
+    z-index: 999;
 }
-.titulo{
+footer{
+    background-color: black;
+    background-image: url(./imagenes/fondo.jpg);
+    background-size: cover;    
+    text-align:left;
+    color: #838181;
+    padding: 5px;    
+    font-size: 1rem;    
+    bottom: 0; 
+    width: 100%;
+}
+.redes{
+    padding-left: 5vh;
+}
+.titulo {
     color: black;
+    font: normal 7rem Varela Round, sans-serif;    
+    left: 0;
+    letter-spacing: 5px;   
     text-align: center;
-    font-size: 8rem;
-    text-decoration: underline;    
-}
+    text-transform: uppercase;
+    top: 40%;
+    width: 100%;
+    animation: move linear 2000ms infinite;     
+  }
+  @keyframes move {
+    0% {
+      text-shadow:
+        4px -4px 0 rgb(199, 209, 211), 
+        3px -3px 0 rgb(199, 209, 211), 
+        2px -2px 0 rgb(199, 209, 211), 
+        1px -1px 0 rgb(199, 209, 211),
+        -4px 4px 0 rgb(59, 92, 189), 
+        -3px 3px 0 rgb(59, 92, 189), 
+        -2px 2px 0 rgb(59, 92, 189), 
+        -1px 1px 0 rgb(59, 92, 189)
+      ;
+    }
+    25% {    
+      text-shadow:      
+        -4px -4px 0 rgb(59, 92, 189), 
+        -3px -3px 0 rgb(59, 92, 189), 
+        -2px -2px 0 rgb(59, 92, 189), 
+        -1px -1px 0 rgb(59, 92, 189),
+        4px 4px 0 rgb(199, 209, 211), 
+        3px 3px 0 rgb(199, 209, 211), 
+        2px 2px 0 rgb(199, 209, 211), 
+        1px 1px 0 rgb(199, 209, 211)      
+      ;
+    }
+    50% {
+      text-shadow:
+        -4px 4px 0 rgb(199, 209, 211), 
+        -3px 3px 0 rgb(199, 209, 211), 
+        -2px 2px 0 rgb(199, 209, 211), 
+        -1px 1px 0 rgb(199, 209, 211),
+        4px -4px 0 rgb(59, 92, 189), 
+        3px -3px 0 rgb(59, 92, 189), 
+        2px -2px 0 rgb(59, 92, 189), 
+        1px -1px 0 rgb(59, 92, 189)
+      ;
+    }
+    75% {
+      text-shadow:
+        4px 4px 0 rgb(59, 92, 189), 
+        3px 3px 0 rgb(59, 92, 189), 
+        2px 2px 0 rgb(59, 92, 189), 
+        1px 1px 0 rgb(59, 92, 189),
+        -4px -4px 0 rgb(199, 209, 211), 
+        -3px -3px 0 rgb(199, 209, 211), 
+        -2px -2px 0 rgb(199, 209, 211), 
+        -1px -1px 0 rgb(199, 209, 211)      
+      ;
+    }
+    100% {
+      text-shadow:
+        4px -4px 0 rgb(199, 209, 211), 
+        3px -3px 0 rgb(199, 209, 211), 
+        2px -2px 0 rgb(199, 209, 211), 
+        1px -1px 0 rgb(199, 209, 211),
+        -4px 4px 0 rgb(59, 92, 189), 
+        -3px 3px 0 rgb(59, 92, 189), 
+        -2px 2px 0 rgb(59, 92, 189), 
+        -1px 1px 0 rgb(59, 92, 189)
+      ;
+    }  
+  }
 h2{
     text-align: center;
     font-size: 5rem;        
@@ -34,26 +131,21 @@ h2{
     align-items: center;
     gap: 20px;
 }
-.boton{
-    border-radius: 5px;
-    font-weight: bold;
-    background-color: darkgrey;
-    height: 50px;    
-}
 .ingreso{
     text-align: center;
     font-size: 2rem;
 }
 .row{    
     justify-content: center;
+    padding: 10px;
 }
 .card{
-    margin:10px;
+    margin: 10px;
     border: 2px solid black;
     text-align: center;    
 }
 .cart-design{
-    background-color: lightskyblue;    
+    background-color: #838181;    
     text-align: center;  
     display: flex;  
     flex-direction: column;
@@ -85,4 +177,10 @@ h2{
 }
 span{
     font-weight: bolder;
+}
+.img-final{
+    border-radius: 6px;
+    border: 2px solid black;
+    width: 600px;
+    margin: 20px;
 }

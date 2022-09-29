@@ -36,11 +36,12 @@ function menorEdad(cliente){
     <p>Volvé cuando seas mayor de 18 años.</p>`;
 
     nuevoContenido.className = "ingreso";
-    document.body.appendChild(nuevoContenido);
+    main.appendChild(nuevoContenido);
     Swal.fire({
         icon: 'error',
         title: 'Ingreso Prohibido',
-        text: 'El ingreso solo está permitido para mayores de 18 años',        
+        text: 'El ingreso solo está permitido para mayores de 18 años', 
+        allowOutsideClick: false,       
       })
 }
 function saludo(cliente) {
@@ -48,22 +49,23 @@ function saludo(cliente) {
     form.innerHTML = "";
     let nuevoContenido = document.createElement("div");
     nuevoContenido.innerHTML = `<p>Hola <span>${cliente.nombre}</span>.</p>
-    <button class="boton" onClick="ingresoTienda()">Continuar</button>`;
+    <button class="btn btn-primary" onClick="ingresoTienda()">Continuar</button>`;
     Swal.fire({
         title: '¡Hola!',        
         text: "Bienvenido a nuestra tienda de vinos.",
-        imageUrl: '/imagenes/imagen-brindis.jpg',
+        imageUrl: '/imagenes/saludo.jpg',
         imageWidth: 450,
         imageHeight: 300,
         imageAlt: 'Custom image',        
         confirmButtonColor: '#3085d6',        
-        confirmButtonText: 'Ingresar'
+        confirmButtonText: 'Ingresar',
+        allowOutsideClick: false , 
     }).then((result) => {
         result.isConfirmed && ingresoTienda()          
     });
 
     nuevoContenido.className = "ingreso";
-    document.body.appendChild(nuevoContenido);
+    main.appendChild(nuevoContenido);
     sessionStorage.setItem("cliente",JSON.stringify(cliente));    
 }
 function ingresoTienda(){
@@ -78,7 +80,7 @@ function ingresoTienda(){
             <div class="card-body">
                 <h4 class="card-title">${producto.variedad}</h4>
                 <p class="card-text">$ ${producto.precio}</p>
-                <a href="#carrito" class="btn btn-secondary" onClick="agregarCarrito(${id})">Comprar</a>
+                <a href="#carrito" class="btn btn-primary" onClick="agregarCarrito(${id})">Comprar</a>
             </div>`;    
         contenido.appendChild(card);
     });
@@ -101,6 +103,7 @@ function agregarCarrito(id){
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
+            allowOutsideClick: false, 
             didOpen: (toast) => {
               toast.addEventListener('mouseenter', Swal.stopTimer)
               toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -120,6 +123,7 @@ function agregarCarrito(id){
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
+            allowOutsideClick: false, 
             didOpen: (toast) => {
               toast.addEventListener('mouseenter', Swal.stopTimer)
               toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -151,7 +155,7 @@ function mostrarCarrito(){
             <div class="card-body">Cantidad: <span>${producto.cantidad}</span></div>
             <div class="card-body">$ <span>${producto.precio}</span></div>
             <div class="card-body">Subtotal: <span>${producto.precio*producto.cantidad}</span></div>
-            <button class="boton" onClick="productDelete(${id})">Borrar Producto</button>
+            <button class="btn btn-primary" onClick="productDelete(${id})">Borrar Producto</button>
             `
             divCarrito.appendChild(carritoCard)
         });
@@ -162,17 +166,16 @@ function mostrarCarrito(){
         totalCarrito.className = "totalCarrito";
         totalCarrito.innerHTML = `
         <h2 class="totalCarrito">Total $ ${total}</h2>
-        <button class="boton" onClick="seguirComprando()">Agregar más productos</button>
-        <button class="boton" onClick="finalizarCompra()">Terminar Compra</button>
-        <button class="boton" onClick="borrarCarrito()">Vaciar Carrito</button>`
+        <button class="btn btn-primary" onClick="seguirComprando()">Agregar más productos</button>
+        <button class="btn btn-primary" onClick="finalizarCompra()">Terminar Compra</button>
+        <button class="btn btn-primary" onClick="borrarCarrito()">Vaciar Carrito</button>`
         divCarrito.appendChild(totalCarrito);
     } else {
         const carritoVacio = document.createElement("div");
         carritoVacio.className = "totalCarrito";
         carritoVacio.innerHTML = `
         <p>El carrito esta vacío! Volvé a la tienda y seleccioná nuestros productos.</p>
-        <button class="boton" onClick="seguirComprando()">Agregar más productos</button>
-        <button class="boton" onClick="finalizarCompra()">Terminar Compra</button>
+        <button class="btn btn-primary" onClick="seguirComprando()">Agregar más productos</button>
         `
         divCarrito.appendChild(carritoVacio);
     }
@@ -186,7 +189,8 @@ function productDelete(id){
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, eliminar.'
+        confirmButtonText: 'Si, eliminar.',
+        allowOutsideClick: false, 
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire(
@@ -209,7 +213,8 @@ function borrarCarrito(){
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, vaciar.'
+        confirmButtonText: 'Si, vaciar.',
+        allowOutsideClick: false, 
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire(
@@ -237,7 +242,7 @@ function seguirComprando(){
             <div class="card-body">
                 <h4 class="card-title">${producto.variedad}</h4>
                 <p class="card-text">$ ${producto.precio}</p>
-                <a href="#carrito" class="btn btn-secondary" onClick="agregarCarrito(${id})">Comprar</a>
+                <a href="#carrito" class="btn btn-primary" onClick="agregarCarrito(${id})">Comprar</a>
             </div>`;    
         section.appendChild(card);
     });
@@ -257,6 +262,7 @@ function finalizarCompra(){
         showCancelButton: true,
         confirmButtonText: 'Si, finalizar.',
         cancelButtonText: 'No, seguir comprando.',
+        allowOutsideClick: false, 
         reverseButtons: true
       }).then((result) => {
         if (result.isConfirmed) {
@@ -268,7 +274,7 @@ function finalizarCompra(){
             const finCompra = document.createElement("section")
             finCompra.className = "finCompra";
             finCompra.innerHTML = `<h3>Completar formulario para finalizar la compra.</h3>
-            <p>El total de la compra es de $${total}.</p>
+            <p>El total de la compra es de <span>$${total}</span>.</p>
             <div class="form">                
                 <div class="column">  
                     <label for="mail">EMAIL</label>          
@@ -277,7 +283,7 @@ function finalizarCompra(){
                     <input type="text" class="form-control" id="inputAddress" placeholder="Calle Falsa 123">                
                     <label for="tel">TELEFONO</label>
                     <input class="field" type="text" name="tel" id="tel" autocomplete="off"placeholder="1123456789">                    
-                    <button class="boton" onClick="saludoFinal()" id="send">Enviar</button>                
+                    <button class="btn btn-primary" onClick="saludoFinal()" id="send">Enviar</button>                
                 </div> 
             </div> 
             <p>Por favor chequear que los datos sean correctos. Enviaremos un email con el resumen de la compra en el cual se especificará el día y horario de entrega en el domicilio proporcionado.</p>
@@ -303,6 +309,7 @@ function saludoFinal(){
     const saludoFinal = document.createElement("div")
     saludoFinal.className = "finCompra";
     saludoFinal.innerHTML = `<h3>¡¡Muchas gracias <span>${usuario.nombre}</span>!!</h3> 
+    <img src="./imagenes/brindis.jpg" alt="imagen brindis saludo final" class="img-final">
     <p>Recibirás el resumen de la compra al email <span>${mail}</span>.</p>
     <p>¡Hasta la próxima!</p>`
     main.appendChild(saludoFinal)
