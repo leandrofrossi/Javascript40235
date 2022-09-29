@@ -54,7 +54,7 @@ function saludo(cliente) {
         title: '¡Hola!',        
         text: "Bienvenido a nuestra tienda de vinos.",
         color: 'black',
-        imageUrl: '/imagenes/saludo.jpg',
+        imageUrl: './imagenes/saludo.jpg',
         imageWidth: 450,
         imageHeight: 300,
         imageAlt: 'Custom image',        
