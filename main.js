@@ -1,21 +1,21 @@
 const productos = [
-    {id:1, variedad: "MALBEC", precio: 950, imagen:"./imagenes/malbec.jpg"},
-    {id:2, variedad: "MALBEC RESERVA", precio: 1300, imagen:"./imagenes/malbecReserva.jpg"},
+    {id:1, variedad: "MALBEC", precio: 950, imagen:"./imagenes/malbec.png"},
+    {id:2, variedad: "MALBEC RESERVA", precio: 1300, imagen:"./imagenes/malbecReserva.png"},
     {id:3, variedad: "CABERNET SAUVIGNON", precio: 1200, imagen:"./imagenes/cabernet.png"},
-    {id:4, variedad: "CABERNET SAUVIGNON RESERVA", precio: 1800, imagen:"./imagenes/cabernetReserva.jpg"},
-    {id:5, variedad: "PINOT NOIR", precio: 2000, imagen:"./imagenes/pinot.jpg"},
-    {id:6, variedad: "RED BLEND", precio: 1250, imagen:"./imagenes/redBlend.jpg"},
+    {id:4, variedad: "CABERNET SAUVIGNON RESERVA", precio: 1800, imagen:"./imagenes/cabernetReserva.png"},
+    {id:5, variedad: "PINOT NOIR", precio: 2000, imagen:"./imagenes/pinot.png"},
+    {id:6, variedad: "RED BLEND", precio: 1250, imagen:"./imagenes/redBlend.png"},
     {id:7, variedad: "ROSADO", precio: 1150, imagen:"./imagenes/rosado.png"},
-    {id:8, variedad: "BLANCO DULCE", precio: 1000, imagen:"./imagenes/blancoDulce.jpg"},
-    {id:9, variedad: "SAUVIGNON BLANC", precio: 850, imagen:"./imagenes/sauvignonBlanc.jpg"},
-    {id:10, variedad: "TORRONTES", precio: 750, imagen:"./imagenes/torrontes.jpg"},
-    {id:11, variedad: "ESPUMOSO BRUT NATURE", precio: 2200, imagen:"./imagenes/espumoso.jpg"},
-    {id:12, variedad: "ESPUMOSO DULCE", precio: 1500, imagen:"./imagenes/espumosoDulce.jpg"},
+    {id:8, variedad: "BLANCO DULCE", precio: 1000, imagen:"./imagenes/blancoDulce.png"},
+    {id:9, variedad: "SAUVIGNON BLANC", precio: 850, imagen:"./imagenes/sauvignonBlanc.png"},
+    {id:10, variedad: "TORRONTES", precio: 750, imagen:"./imagenes/torrontes.png"},
+    {id:11, variedad: "ESPUMOSO BRUT NATURE", precio: 2200, imagen:"./imagenes/espumoso.png"},
+    {id:12, variedad: "ESPUMOSO DULCE", precio: 1500, imagen:"./imagenes/espumosoDulce.png"},
 ];
 function Usuario (nombre, edad) {
     this.nombre = nombre;
     this.edad = edad;
-}
+};
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let total = 0;
 let main = document.querySelector("#main");
@@ -27,7 +27,7 @@ function nuevoCliente() {
     let edad = document.querySelector("#age").value;
     let cliente = new Usuario(nombre, edad);
     (cliente.edad < 18) ? menorEdad(cliente) : saludo(cliente);
-}
+};
 function menorEdad(cliente){
     let formulario = document.querySelector("#inicio");
     formulario.innerHTML = "";
@@ -43,7 +43,7 @@ function menorEdad(cliente){
         text: 'El ingreso solo está permitido para mayores de 18 años', 
         allowOutsideClick: false,       
       })
-}
+};
 function saludo(cliente) {
     let form = document.querySelector("#inicio");
     form.innerHTML = "";
@@ -68,7 +68,7 @@ function saludo(cliente) {
     nuevoContenido.className = "ingreso";
     main.appendChild(nuevoContenido);
     sessionStorage.setItem("cliente",JSON.stringify(cliente));    
-}
+};
 function ingresoTienda(){
     let contenido = document.querySelector(".ingreso");
     contenido.className = "row";
@@ -137,10 +137,10 @@ function agregarCarrito(id){
             title: 'Producto agregado al carrito'
           })         
     }
-}
+};
 function storage(carrito){
     localStorage.setItem("carrito",JSON.stringify(carrito));
-}
+};
 function mostrarCarrito(){
     main.innerHTML = "";
     const divCarrito = document.createElement("section");
@@ -182,7 +182,7 @@ function mostrarCarrito(){
         divCarrito.appendChild(carritoVacio);
     }
 
-}
+};
 function productDelete(id){  
     Swal.fire({
         title: '¿Eliminar producto?',
@@ -207,7 +207,7 @@ function productDelete(id){
             mostrarCarrito();        
         }
     }) 
-}
+};
 function borrarCarrito(){
     Swal.fire({
         title: '¿Estas seguro/a?',
@@ -232,7 +232,7 @@ function borrarCarrito(){
             mostrarCarrito();
         }
     })    
-}
+};
 function seguirComprando(){
     main.innerHTML = "";
     let section = document.createElement("section")
@@ -250,7 +250,7 @@ function seguirComprando(){
             </div>`;    
         section.appendChild(card);
     });
-}
+};
 function finalizarCompra(){
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -306,7 +306,7 @@ function finalizarCompra(){
           seguirComprando()
         }
       })          
-}
+};
 function saludoFinal(){
     let mail = document.querySelector(".form-control").value;
     let usuario = JSON.parse(sessionStorage.getItem("cliente"));
@@ -323,4 +323,4 @@ function saludoFinal(){
     storage(carrito); 
     cartBoton = document.querySelector("#btnCart");
     cartBoton.remove();
-}
+};
