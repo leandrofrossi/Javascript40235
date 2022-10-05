@@ -1,27 +1,27 @@
-const productos = [
-    {id:1, variedad: "MALBEC", precio: 950, imagen:"./imagenes/malbec.png"},
-    {id:2, variedad: "MALBEC RESERVA", precio: 1300, imagen:"./imagenes/malbecReserva.png"},
-    {id:3, variedad: "CABERNET SAUVIGNON", precio: 1200, imagen:"./imagenes/cabernet.png"},
-    {id:4, variedad: "CABERNET SAUVIGNON RESERVA", precio: 1800, imagen:"./imagenes/cabernetReserva.png"},
-    {id:5, variedad: "PINOT NOIR", precio: 2000, imagen:"./imagenes/pinot.png"},
-    {id:6, variedad: "RED BLEND", precio: 1250, imagen:"./imagenes/redBlend.png"},
-    {id:7, variedad: "ROSADO", precio: 1150, imagen:"./imagenes/rosado.png"},
-    {id:8, variedad: "BLANCO DULCE", precio: 1000, imagen:"./imagenes/blancoDulce.png"},
-    {id:9, variedad: "SAUVIGNON BLANC", precio: 850, imagen:"./imagenes/sauvignonBlanc.png"},
-    {id:10, variedad: "TORRONTES", precio: 750, imagen:"./imagenes/torrontes.png"},
-    {id:11, variedad: "ESPUMOSO BRUT NATURE", precio: 2200, imagen:"./imagenes/espumoso.png"},
-    {id:12, variedad: "ESPUMOSO DULCE", precio: 1500, imagen:"./imagenes/espumosoDulce.png"},
-];
+//traigo los productos del archivo json
+let productos = [];
+async function traerProductos(){
+    const respuesta = await fetch ('./productos.json')
+    const data = await respuesta.json()
+    for(let obj of data){
+        productos.push(obj)
+    }     
+}
+traerProductos();
+
 function Usuario (nombre, edad) {
     this.nombre = nombre;
     this.edad = edad;
 };
+
+//inicializo el carrito con datos del LS o vacio
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let total = 0;
 let main = document.querySelector("#main");
 let boton = document.querySelector("#enviar");
 boton.addEventListener("click", nuevoCliente);
 
+//capturo datos del usuario y valido la edad
 function nuevoCliente() {
     let nombre = document.querySelector("#name").value;
     let edad = document.querySelector("#age").value;
@@ -69,6 +69,7 @@ function saludo(cliente) {
     main.appendChild(nuevoContenido);
     sessionStorage.setItem("cliente",JSON.stringify(cliente));    
 };
+//ingreso a la tienda
 function ingresoTienda(){
     let contenido = document.querySelector(".ingreso");
     contenido.className = "row";
@@ -89,6 +90,7 @@ function ingresoTienda(){
     let botonCart = document.querySelector("#btnCart");
     botonCart.addEventListener("click", mostrarCarrito);
 };
+//evento agregado de producto al carrito y guardado al LS
 function agregarCarrito(id){
     const carritoId = carrito.findIndex((art) => {
         return art.id === productos[id].id
@@ -141,6 +143,7 @@ function agregarCarrito(id){
 function storage(carrito){
     localStorage.setItem("carrito",JSON.stringify(carrito));
 };
+//muestro carrito y sus funciones
 function mostrarCarrito(){
     main.innerHTML = "";
     const divCarrito = document.createElement("section");
@@ -251,6 +254,7 @@ function seguirComprando(){
         section.appendChild(card);
     });
 };
+//final de compra y formulario de entrega
 function finalizarCompra(){
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {

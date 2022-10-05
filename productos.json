@@ -1,0 +1,14 @@
+[
+    {"id":1, "variedad": "MALBEC", "precio": 950, "imagen":"./imagenes/malbec.png"},
+    {"id":2, "variedad": "MALBEC RESERVA", "precio": 1300, "imagen":"./imagenes/malbecReserva.png"},
+    {"id":3, "variedad": "CABERNET SAUVIGNON", "precio": 1200, "imagen":"./imagenes/cabernet.png"},
+    {"id":4, "variedad": "CABERNET SAUVIGNON RESERVA", "precio": 1800, "imagen":"./imagenes/cabernetReserva.png"},
+    {"id":5, "variedad": "PINOT NOIR", "precio": 2000, "imagen":"./imagenes/pinot.png"},
+    {"id":6, "variedad": "RED BLEND", "precio": 1250, "imagen":"./imagenes/redBlend.png"},
+    {"id":7, "variedad": "ROSADO", "precio": 1150, "imagen":"./imagenes/rosado.png"},
+    {"id":8, "variedad": "BLANCO DULCE", "precio": 1000, "imagen":"./imagenes/blancoDulce.png"},
+    {"id":9, "variedad": "SAUVIGNON BLANC", "precio": 850, "imagen":"./imagenes/sauvignonBlanc.png"},
+    {"id":10, "variedad": "TORRONTES", "precio": 750, "imagen":"./imagenes/torrontes.png"},
+    {"id":11, "variedad": "ESPUMOSO BRUT NATURE", "precio": 2200, "imagen":"./imagenes/espumoso.png"},
+    {"id":12, "variedad": "ESPUMOSO DULCE", "precio": 1500, "imagen":"./imagenes/espumosoDulce.png"}
+]
