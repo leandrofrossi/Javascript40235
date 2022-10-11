@@ -76,7 +76,7 @@ function ingresoTienda(){
     contenido.innerHTML = "";
     productos.forEach((producto,id) => {
         let card = document.createElement("div");
-        card.classList.add("card", "col-sm-12", "col-lg-3");
+        card.classList.add("card", "col-sm-6", "col-lg-3");
         card.innerHTML = `
             <img src="${producto.imagen}" class="card-img-top" alt="...">
             <div class="card-body">
@@ -155,7 +155,7 @@ function mostrarCarrito(){
             const carritoCard = document.createElement("div");
             carritoCard.className = "carritoCard";
             carritoCard.innerHTML = `
-            <img src="${producto.imagen}" class="cart-img">
+            <img src="${producto.imagen}" class="cart-img img-fluid">
             <div class="card-body">Producto: <span>${producto.variedad}</span></div>
             <div class="card-body">Cantidad: <span>${producto.cantidad}</span></div>
             <div class="card-body">$ <span>${producto.precio}</span></div>
@@ -287,11 +287,11 @@ function finalizarCompra(){
             <div class="form">                
                 <div class="column">  
                     <label for="mail">EMAIL</label>          
-                    <input type="text" class="form-control" placeholder="juan.perez@gmail.com" aria-label="mail">                
+                    <input type="email" class="form-control" placeholder="juan.perez@gmail.com" aria-label="mail">                
                     <label for="inputAddress" class="form-label">DIRECCION</label>
                     <input type="text" class="form-control" id="inputAddress" placeholder="Calle Falsa 123">                
                     <label for="tel">TELEFONO</label>
-                    <input class="field" type="text" name="tel" id="tel" autocomplete="off"placeholder="1123456789">                    
+                    <input class="field" type="tel" name="tel" id="tel" autocomplete="off" placeholder="1123456789">                    
                     <button class="btn btn-primary" onClick="saludoFinal()" id="send">Enviar</button>                
                 </div> 
             </div> 
@@ -318,7 +318,7 @@ function saludoFinal(){
     const saludoFinal = document.createElement("div")
     saludoFinal.className = "finCompra";
     saludoFinal.innerHTML = `<h3>¡¡Muchas gracias <span>${usuario.nombre}</span>!!</h3> 
-    <img src="./imagenes/brindis.jpg" alt="imagen brindis saludo final" class="img-final">
+    <img src="./imagenes/brindis.jpg" alt="imagen brindis saludo final" class="img-final img-fluid">
     <p>Recibirás el resumen de la compra al email <span>${mail}</span>.</p>
     <p>¡Hasta la próxima!</p>`
     main.appendChild(saludoFinal)
