@@ -26,7 +26,16 @@ function nuevoCliente() {
     let nombre = document.querySelector("#name").value;
     let edad = document.querySelector("#age").value;
     let cliente = new Usuario(nombre, edad);
-    (cliente.edad < 18) ? menorEdad(cliente) : saludo(cliente);
+    if(!cliente.nombre || !cliente.edad){
+        Swal.fire({
+            icon: 'error',
+            title: '¡Faltan datos!',
+            text: 'Ingrese todos los datos solicitados.', 
+            allowOutsideClick: false,       
+          });   
+    }else{
+        (cliente.edad < 18) ? menorEdad(cliente) : saludo(cliente);
+    };
 };
 function menorEdad(cliente){
     let formulario = document.querySelector("#inicio");
@@ -34,7 +43,6 @@ function menorEdad(cliente){
     let nuevoContenido = document.createElement("div");
     nuevoContenido.innerHTML = `<p>Lo sentimos <span>${cliente.nombre}</span>, pero tu edad no alcanza para ingresar a nuestra tienda.</p>
     <p>Volvé cuando seas mayor de 18 años.</p>`;
-
     nuevoContenido.className = "ingreso";
     main.appendChild(nuevoContenido);
     Swal.fire({
@@ -42,7 +50,7 @@ function menorEdad(cliente){
         title: 'Ingreso Prohibido',
         text: 'El ingreso solo está permitido para mayores de 18 años', 
         allowOutsideClick: false,       
-      })
+    });
 };
 function saludo(cliente) {
     let form = document.querySelector("#inicio");
@@ -51,7 +59,7 @@ function saludo(cliente) {
     nuevoContenido.innerHTML = `<p>Hola <span>${cliente.nombre}</span>.</p>
     <button class="btn btn-primary" onClick="ingresoTienda()">Continuar</button>`;
     Swal.fire({
-        title: '¡Hola!',        
+        title: `<p>¡Hola <span>${cliente.nombre}</span>!</p>`,        
         text: "Bienvenido a nuestra tienda de vinos.",
         color: 'black',
         imageUrl: './imagenes/saludo.jpg',
@@ -78,7 +86,7 @@ function ingresoTienda(){
         let card = document.createElement("div");
         card.classList.add("card", "col-sm-6", "col-lg-3");
         card.innerHTML = `
-            <img src="${producto.imagen}" class="card-img-top" alt="...">
+            <img src="${producto.imagen}" class="card-img-top img-fluid" alt="...">
             <div class="card-body">
                 <h4 class="card-title">${producto.variedad}</h4>
                 <p class="card-text">$ ${producto.precio}</p>
@@ -105,8 +113,7 @@ function agregarCarrito(id){
             position: 'top-end',
             showConfirmButton: false,
             timer: 3000,
-            timerProgressBar: true,
-            allowOutsideClick: false, 
+            timerProgressBar: true,             
             didOpen: (toast) => {
               toast.addEventListener('mouseenter', Swal.stopTimer)
               toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -126,8 +133,7 @@ function agregarCarrito(id){
             position: 'top-end',
             showConfirmButton: false,
             timer: 3000,
-            timerProgressBar: true,
-            allowOutsideClick: false, 
+            timerProgressBar: true,            
             didOpen: (toast) => {
               toast.addEventListener('mouseenter', Swal.stopTimer)
               toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -243,9 +249,9 @@ function seguirComprando(){
     main.appendChild(section)
     productos.forEach((producto,id) => {
         let card = document.createElement("div");
-        card.classList.add("card", "col-sm-12", "col-lg-3");
+        card.classList.add("card", "col-sm-6", "col-lg-3");
         card.innerHTML = `
-            <img src="${producto.imagen}" class="card-img-top" alt="...">
+            <img src="${producto.imagen}" class="card-img-top img-fluid" alt="...">
             <div class="card-body">
                 <h4 class="card-title">${producto.variedad}</h4>
                 <p class="card-text">$ ${producto.precio}</p>
@@ -287,12 +293,12 @@ function finalizarCompra(){
             <div class="form">                
                 <div class="column">  
                     <label for="mail">EMAIL</label>          
-                    <input type="email" class="form-control" placeholder="juan.perez@gmail.com" aria-label="mail">                
+                    <input type="email" class="form-control mail" placeholder="juan.perez@gmail.com" aria-label="mail required">                
                     <label for="inputAddress" class="form-label">DIRECCION</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="Calle Falsa 123">                
+                    <input type="text" class="form-control" id="inputAddress" placeholder="Calle Falsa 123" required>                
                     <label for="tel">TELEFONO</label>
-                    <input class="field" type="tel" name="tel" id="tel" autocomplete="off" placeholder="1123456789">                    
-                    <button class="btn btn-primary" onClick="saludoFinal()" id="send">Enviar</button>                
+                    <input class="field" type="tel" name="tel" id="tel" autocomplete="off" placeholder="1123456789" required>                    
+                    <button class="btn btn-primary" onClick="validarForm()" id="send">Enviar</button>                
                 </div> 
             </div> 
             <p>Por favor chequear que los datos sean correctos. Enviaremos un email con el resumen de la compra en el cual se especificará el día y horario de entrega en el domicilio proporcionado.</p>
@@ -311,8 +317,24 @@ function finalizarCompra(){
         }
       })          
 };
+function validarForm(){
+    let mail = document.querySelector(".mail").value;
+    let direc = document.querySelector("#inputAddress").value;
+    let tel = document.querySelector("#tel").value;
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(!mail || !direc || !tel){
+        Swal.fire({
+            icon: 'error',
+            title: '¡Faltan datos!',
+            text: 'Ingrese todos los datos solicitados.', 
+            allowOutsideClick: false,       
+          }); 
+    } else{
+        (mail.match(regex)) ? saludoFinal() : Swal.fire('Es necesario un email correcto');
+    };
+};
 function saludoFinal(){
-    let mail = document.querySelector(".form-control").value;
+    let mail = document.querySelector(".mail").value;   
     let usuario = JSON.parse(sessionStorage.getItem("cliente"));
     main.innerHTML = "";
     const saludoFinal = document.createElement("div")
