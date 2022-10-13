@@ -23,7 +23,7 @@ boton.addEventListener("click", nuevoCliente);
 
 //capturo datos del usuario y valido la edad
 function nuevoCliente() {
-    let nombre = document.querySelector("#name").value;
+    let nombre = document.querySelector("#name").value.toUpperCase();
     let edad = document.querySelector("#age").value;
     let cliente = new Usuario(nombre, edad);
     if(!cliente.nombre || !cliente.edad){
@@ -297,7 +297,7 @@ function finalizarCompra(){
                     <label for="inputAddress" class="form-label">DIRECCION</label>
                     <input type="text" class="form-control" id="inputAddress" placeholder="Calle Falsa 123" required>                
                     <label for="tel">TELEFONO</label>
-                    <input class="field" type="tel" name="tel" id="tel" autocomplete="off" placeholder="1123456789" required>                    
+                    <input class="field" type="number" name="tel" id="tel" autocomplete="off" placeholder="1123456789" required>                    
                     <button class="btn btn-primary" onClick="validarForm()" id="send">Enviar</button>                
                 </div> 
             </div> 
@@ -330,7 +330,7 @@ function validarForm(){
             allowOutsideClick: false,       
           }); 
     } else{
-        (mail.match(regex)) ? saludoFinal() : Swal.fire('Es necesario un email correcto');
+        (mail.match(regex)&&tel.length>5) ? saludoFinal() : Swal.fire('Es necesario un email/tel correcto');
     };
 };
 function saludoFinal(){
